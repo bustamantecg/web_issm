@@ -15,7 +15,7 @@
         //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     
         carrera_id:{ type: 'number' },
-        nombre: { type: 'string' },
+        nombre: { type: 'string', required: true },
         duracion: { type: 'number' },
         cuatrimestre: { type: 'number' },
         abreviado: { type: 'string' },
