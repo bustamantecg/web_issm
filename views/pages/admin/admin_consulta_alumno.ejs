@@ -1,0 +1,272 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <% if(personas.sexo=='F' ){ %>
+            <h2>Consulta Alumna ID: <%=personas.id%>
+            </h2>
+            <% }else{%>
+                <h2>Consulta Alumno ID: <%=personas.id%>
+                </h2>
+                <%}%>
+                    <img src="images/fotos/<%=personas.foto%>" width="100" height="100" alt="">
+                    <% flash.get('mensaje').forEach(function (msg) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%=msg%>
+                        </div>
+                        <% }) %>
+                            <!--Inicio Acordion-->
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left" type="button"
+                                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                <strong>Datos Personales</strong>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <h3><%=personas.apellido%>, <%=personas.nombre%></h3>
+                                            <p class="text-primary">D.N.I.: <%=personas.dni%></p>
+                                            <p class="text-primary">Fecha de Nacimiento:<%=personas.fechanac.toLocaleDateString()%> </p>
+                                            <p class="text-primary">Celular - Teléfono: <%=personas.celular%></p>
+                                            <p class="text-primary">Domicilio: <%=personas.domicilio%> </p>
+                                            <p class="text-primary">EMail: <%=personas.email%></p>
+                                            <p class="text-primary">Alta: <%=personas.alta.toLocaleDateString()%></p>
+                                            <% if(personas.sexo=='F' ){ %>
+                                                <p class="text-primary">Sexo: Femenino</p>
+                                            <% }else{%>
+                                                <p class="text-primary">Sexo: Masculino</p>
+                                            <%}%>
+                                            <% if(personas.activa){ %>
+                                                <p class="text-primary">Usuario de Sistema: Activo</p>
+                                            <% }else{%>
+                                                <p class="text-primary">Usuario de Sistema: Inactivo</p>
+                                            <%}%>
+                                            
+                                            <!-- Boton Resetear Clavetrigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                       data-target="#staticBackdrop"> Resetear Clave 
+                                                </button>
+
+                                                <!-- Modal del boton Resetear clave -->
+                                                <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+                                                  data-keyboard="false" tabindex="-1"
+                                                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="staticBackdropLabel">Resetear
+                                                                  Clave de <%=personas.apellido%>, <%=personas.nombre%>
+                                                              </h5>
+                                                              <button type="button" class="close" data-dismiss="modal"
+                                                                  aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              ¿Estas Seguro de Resetear la Clave?
+                                                              <p><small>Solo si el titular de la cuenta lo solicita.
+                                                                      Al resetear la cuenta el usuario/Alumno o Alumna,
+                                                                      deberá ingresar con su respectivo Nro. de D.N.I.
+                                                                      <%=personas.contrasena%>
+                                                                  </small></p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                              <a href="/resetear-clave/<%=personas.id%>" class="btn btn-primary">Si Resetear</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                             <!-- FIN Boton Resetear Clavetrigger modal -->
+                                             &nbsp;
+                                            
+                                             <% if(personas.activa){ %>
+                                                <div>   <!-- Boton Resetear Clavetrigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#staticBackdropActivar"> Desactivar Usuario </button>                                                    
+                                                </div>  
+
+                                                <div class="modal fade" id="staticBackdropActivar" data-backdrop="static"
+                                                  data-keyboard="false" tabindex="-1"
+                                                  aria-labelledby="staticBackdropLabelActivar" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabelActivar">Desactivar Usuario de Sistema </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            ¿Estas Seguro de Privar el Acceso al Sistema?
+                                                            <p><small>El Usuario <%=personas.apellido%>, &nbsp; <%=personas.nombre%>
+                                                            no podrá acceder al Sistema  </small></p>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                            <a href="#/<%=personas.id%>" class="btn btn-primary">Si DesActivar</a>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            <% }else{%>                                                
+                                                <div>   <!-- Boton Resetear Clavetrigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#staticBackdropActivarU"> Activar Usuario </button>                                                    
+                                                </div>  
+
+                                                <div class="modal fade" id="staticBackdropActivarU" data-backdrop="static"
+                                                  data-keyboard="false" tabindex="-1"
+                                                  aria-labelledby="staticBackdropLabelActivarU" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabelActivarU">Activar Usuario de Sistema </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"> <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            ¿Estas Seguro de Permitir el Acceso al Sistema?
+                                                            <p><small>El Usuario <%=personas.apellido%>, &nbsp; <%=personas.nombre%>
+                                                            podrá acceder al Sistema  </small></p>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                            <a href="#/<%=personas.id%>" class="btn btn-primary">Si Activar</a>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+
+                                            <%}%>
+                                        
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                                <strong>Carrera Inscripto</strong>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            listado de las carreras que cursa.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingCuotas">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                                <strong>Cuotas</strong>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingCuotas"
+                                        data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Aqui poner tabla con cuotas
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">id</th>
+                                                        <th scope="col">Concepto</th>
+                                                        <th scope="col">Fecha Pago</th>
+                                                        <th scope="col">Importe</th>
+                                                        <th scope="col">Importe</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@mdo</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingNotasFinales">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseNotasFinales"
+                                                aria-expanded="false" aria-controls="collapseNotasFinales">
+                                                <strong>Notas Finales</strong>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseNotasFinales" class="collapse"
+                                        aria-labelledby="headingNotasFinales" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Aqui poner las Notas de Materias Rendidas
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingNotasFinales">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                                data-toggle="collapse" data-target="#collapseResetearClave"
+                                                aria-expanded="false" aria-controls="collapseResetearClave">
+                                                <strong>Resetear Clave</strong>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseResetearClave" class="collapse"
+                                        aria-labelledby="headingNotasFinales" data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                           
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- END de Acordion-->
+
+    </div>
+    <div class="col-md-3"></div>
+</div>

@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2>Buscar Persona</h2>
+  
+      <% flash.get('mensaje').forEach(function (msg) { %>
+        <div class="alert alert-danger" role="alert">
+          <%=msg%>
+        </div>
+        <% }) %>
+  
+          <form action="/procesar-buscar-editar-persona" method="post" enctype="multipart/form-data">
+  
+            <div class="form-group">
+              <label for="buscar">Buscar por ...</label>
+              <select name="buscar" class="custom-select" autofocus required>              
+                <option value="id">ID</option>
+                <option value="dni">DNI</option>
+                <option value="email">EMail</option>                   
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="valor_Buscar">Dato a buscar</label>
+              <input type="text" class="form-control" id="valor_Buscar" name="valor_Buscar" title="Ingrese el dato a buscar"
+                 required />
+            </div>
+  
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>

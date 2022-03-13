@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2>Registrar Nueva Persona</h2>
+
+    <% flash.get('mensaje').forEach(function (msg) { %>
+      <div class="alert alert-danger" role="alert">
+        <%=msg%>
+      </div>
+      <% }) %>
+
+        <form action="/procesar-registrar-persona" method="post" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="dni">DNI</label>
+            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}" title="Debe poner 8 números"
+              maxlength="8" required />
+          </div>
+
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" required>
+          </div>
+
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+
+          <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select name="sexo" class="custom-select" id="sexo" required>             
+              <option value="F">Femenino</option>
+              <option value="M">Masculino</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="domicilio">Domicilio</label>
+            <input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="48" required>
+          </div>
+
+          <div class="form-group">
+            <label for="celular">Celular o Teléfono</label>
+            <input type="text" class="form-control" id="celular" name="celular" maxlength="38" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fechanac">Fecha de Nacimiento</label>
+            <input type="date" name="fechanac" class="form-control" id="fechanac">
+          </div>
+
+          <div class="form-group">
+            <label for="perfil">Perfil</label>
+            <select name="perfil" class="custom-select" required>              
+              <option value="1">Alumno</option>
+              <option value="2">Docente</option>
+              <option value="3">Administrativo</option>
+              <option value="-1">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="foto">Foto</label>
+            <input type="file" class="form-control" id="foto" name="foto">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>

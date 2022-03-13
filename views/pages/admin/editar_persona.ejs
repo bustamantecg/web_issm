@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-6">
+
+    <% flash.get('mensaje').forEach(function (msg) { %>
+      <div class="alert alert-success" role="alert">
+        <%=msg%>
+      </div>
+      <% }) %>
+        <h2>Admin - Editar Persona</h2>
+
+        <form action="/procesar-editar-persona/<%=personas.id%>" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label> <b>ID</b></label>
+            <input type="text" class="form-control" id="id" name="id" value='<%=personas.id%>' >            
+          </div>
+
+          <div class="form-group">
+            <label for="dni"><b>DNI</b></label>
+            <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}" title="Debe poner 8 números"
+              maxlength="8" value='<%=personas.dni%>' required autofocus/>
+          </div>
+
+          <div class="form-group">
+            <label for="apellido"><b>Apellido</b></label>
+            <input type="text" class="form-control" id="apellido" name="apellido" value='<%=personas.apellido%>' required>
+          </div>
+
+          <div class="form-group">
+            <label for="nombre"><b>Nombre</b></label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value='<%=personas.nombre%>' required>
+          </div>
+
+          <div class="form-group">
+            <label for="sexo"><b>Sexo</b></label>
+            <select name="sexo" class="custom-select" id="sexo" required>             
+              <option value="F" <% if (personas.sexo == 'F') { %> selected <% } %> >Femenino</option>
+              <option value="M" <% if (personas.sexo == 'M') { %> selected <% } %> >Masculino</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="domicilio"><b>Domicilio </b></label>
+            <input type="text" class="form-control" id="domicilio" name="domicilio" maxlength="48" value= '<%=personas.domicilio%>'required>
+          </div>
+
+          <div class="form-group">
+            <label for="celular"><b>Celular o Teléfono</b></label>
+            <input type="text" class="form-control" id="celular" name="celular" maxlength="38" value='<%=personas.celular%>' required>
+          </div>
+
+          <div class="form-group">
+            <label for="email"><b>Email</b></label>
+            <input type="email" class="form-control" id="email" name="email" required value='<%=personas.email%>'>
+          </div>
+
+          <div class="form-group">
+            <label for="fechanac"><b>Fecha de Nacimiento</b></label>
+            <input type="date" name="fechanac" class="form-control" id="fechanac" value=<%=fechaN%>>
+          </div>
+
+          <div class="form-group">
+            <label for="perfil"> <b>Perfil</b></label>
+            <select name="perfil" class="custom-select" required>              
+              <option value="1"  <% if (personas.perfil == 1) { %> selected <% } %>>Alumno</option>
+              <option value="2"  <% if (personas.perfil == 2) { %> selected <%}%>> Docente</option>
+              <option value="3"  <% if (personas.perfil == 3) { %> selected <%}%>>Administrativo</option>
+              <option value="-1" <% if (personas.perfil == -1) { %> selected <%}%>>Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">                       
+            <img src="images/fotos/<%=personas.foto%>" class="img-thumbnail" width="150" height="150" alt=<%=personas.foto%> >
+            <label for="foto"><b>Avatar - Foto: </b> <%=personas.foto%>  </label>
+            <input type="file" class="form-control" id="foto" name="foto" value='<%=personas.foto%>' accept="image/png, .jpeg, .jpg, image/gif" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Editar</button> &nbsp &nbsp <a class="btn btn-primary" href="/admin-buscar-editar-persona" >Cancelar</a>
+        </form>
+
+  </div>
+
+</div>

@@ -1,0 +1,67 @@
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h2>Cambiar Mi Clave</h2>
+  
+      <% flash.get('mensaje').forEach(function (msg) { %>
+        <div class="alert alert-danger" role="alert">
+          <%=msg%>
+        </div>
+        <% }) %> 
+          <form action="/procesar-cambiar-clave" method="post" enctype="multipart/form-data" id="formulario">  
+            <div class="form-group">
+              <label for="claveactual">Clave Actual</label> <span class="text-danger" id="errorclaveactual"></span>
+              <input type="password" class="form-control" id="claveactual" name="claveactual" maxlength="32" required autofocus>
+            </div>  
+            
+            <div class="form-group">
+              <label for="clavenueva">Nueva Clave</label>  <span class="text-danger" id="errorContrasena"></span>
+              <input type="password" pattern=".{6,}"" class="form-control" id="clavenueva" name="clavenueva" title="Debe contener al menos 6 caracteres" required >
+            </div>
+
+            <div class="form-group">
+                <label for="clavenuevarepite">Repita Nueva Clave</label> 
+                <input type="password" pattern=".{6,}" class="form-control" id="clavenuevarepite" name="clavenuevarepite" title="Debe contener al menos 6 caracteres" required >               
+            </div>       
+
+            <button type="submit" class="btn btn-primary" onclick="return validar(this.form)" >Registrar</button>
+          </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <script 
+  function limpiarErrores() {
+    console.log("Entro en la validacion")
+    
+    var errores = document.getElementsByClassName("text-danger");
+    for (var i = 0; i < errores.length; i++) {
+        errores[i].innerHTML = "";
+    }
+}
+
+function validar(formulario) {
+    limpiarErrores();
+
+
+    if (formulario.contrasena.value.trim().length < 7) {
+        document.getElementById("errorContrasena").innerText = "Contraseña inválida (Mínimo 6 caracteres)";
+        formulario.contrasena.focus();
+        return false;
+    }
+
+    if (formulario.contrasena.value != formulario.clavenuevarepite.value) {
+        document.getElementById("errorConfirmacion").innerText = "Confirmación no coincide";
+        formulario.confirmacion.focus();
+        return false;
+    }
+
+
+    if (confirm('¿Estas seguro de Cambiar Su Clave de Acceso al Sistema?')) {
+        alert("Felicitaciones!!!.  Gracias.");
+        document.formulario.submit();
+    } else {
+        alert("Clave No Actualizada");
+    }
+} > </script>

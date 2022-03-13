@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="/">Inicio</a>
+    </li>
+
+  </ul>
+  <ul class="navbar-nav mr-2">
+
+    <% if (session.alumno && session.alumno.perfil==1) { %>
+      <li class="nav-item my-auto">
+        <span class="px-2 text-white"> Alumno:
+          <%=session.alumno.nombre%>
+        </span>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-light mx-2" href="#">Notas</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="btn btn-light mx-2" href="#">Inscripciones</a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-light mx-2" href="/cerrar-sesion-alumno">Cerrar Sesión</a>
+      </li>
+
+
+      <% } else if (session.docente && session.docente.perfil==2) { %>
+        <li class="nav-item my-auto">
+          <span class="px-2 text-white">
+            <strong>Docente:</strong>
+            <%=session.docente.nombre%>
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" href="#">Mesas</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" href="#">Notas</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" href="#">Cursos</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" href="#">Fechas</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-light mx-2" href="/cerrar-sesion-docente">Cerrar Sesión</a>
+        </li>
+
+        <% } else if (session.admin && session.admin.perfil==3) { %>
+          <li class="nav-item my-auto">
+            <span class="px-2 text-white">
+              <strong>Admin:</strong>
+              <%=session.admin.nombre%>
+            </span>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Personas
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/admin-registrar-persona">Registrar</a>
+              <a class="dropdown-item" href="/admin-buscar-editar-persona">Editar</a>
+              <a class="dropdown-item" href="#">Consultar</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Aulas
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Definir</a>
+              <a class="dropdown-item" href="#">Editar</a>
+              <a class="dropdown-item" href="#">Consultar</a>
+            </div>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Alumnos
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Inscribir a Carrera</a>
+              <a class="dropdown-item" href="#">Inscribir a Materia</a>
+              <a class="dropdown-item" href="/admin-buscar-alumno">Consulta</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Herramientas
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/admin-cambiar-clave">Cambiar Clave</a>
+              <a class="dropdown-item" href="#">Permisos</a>
+              <a class="dropdown-item" href="#">Resetear Clave</a>
+              <a class="dropdown-item" href="#">Habilitar</a>
+            </div>
+          </li>          
+
+        
+          <li class="nav-item">
+            <a class="btn btn-light mx-2" href="/cerrar-sesion-admin">Cerrar Sesión</a>
+          </li>
+  
+          <% } else { %> 
+
+          <li class="nav-item">
+            <a class="btn btn-light mx-2" href="/inicio-sesion">Inicio de Sesión</a>
+          </li>
+          <% } %>
+  </ul>
+</nav>
